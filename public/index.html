@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Midnight Garage — Crew Recruitment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Animated background canvas -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <div class="page-wrapper">
+
+    <!-- ═══════════════════════════════════════════════
+         LEFT — Brand Panel
+    ════════════════════════════════════════════════ -->
+    <aside class="brand-panel" aria-label="Midnight Garage Brand">
+      <div class="brand-content">
+
+        <div class="brand-badge">EST. 2024 &nbsp;·&nbsp; PRIVATE TEAM</div>
+
+        <!-- Logo -->
+        <div class="brand-logo" aria-hidden="true">
+          <svg viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Car body -->
+            <path d="M10 40 Q12 30 28 28 L40 22 Q52 18 60 18 Q72 18 84 22 L96 28 Q110 30 112 40 L114 44 Q100 46 60 46 Q20 46 8 44 Z" fill="#FF4500" opacity="0.9"/>
+            <!-- Windshield -->
+            <path d="M40 22 L48 30 L76 30 L84 22 Q72 18 60 18 Q52 18 40 22Z" fill="rgba(0,200,212,0.3)" stroke="rgba(0,200,212,0.6)" stroke-width="0.5"/>
+            <!-- Side stripe -->
+            <path d="M20 36 Q60 34 100 36" stroke="#FFB300" stroke-width="1.5" opacity="0.8"/>
+            <!-- Wheels -->
+            <circle cx="30" cy="44" r="8" fill="#111" stroke="#555" stroke-width="2"/>
+            <circle cx="30" cy="44" r="4" fill="#333" stroke="#FF4500" stroke-width="1.5"/>
+            <circle cx="90" cy="44" r="8" fill="#111" stroke="#555" stroke-width="2"/>
+            <circle cx="90" cy="44" r="4" fill="#333" stroke="#FF4500" stroke-width="1.5"/>
+            <!-- Exhaust flame -->
+            <path d="M8 40 Q2 38 0 35 Q4 37 6 36 Q3 33 5 30 Q8 34 10 40Z" fill="#FFB300" opacity="0.7"/>
+          </svg>
+        </div>
+
+        <!-- Title -->
+        <h1 class="brand-title" aria-label="Midnight Garage">
+          <span class="brand-midnight">MIDNIGHT</span>
+          <span class="brand-garage">GARAGE</span>
+        </h1>
+
+        <p class="brand-tagline">Only the elite make the cut.</p>
+
+        <div class="brand-divider">
+          <span></span><span class="divider-icon">◆</span><span></span>
+        </div>
+
+        <!-- Open positions -->
+        <div class="brand-positions" aria-label="Open positions">
+          <p class="positions-title">OPEN POSITIONS</p>
+          <div class="position-item">
+            <span class="pos-dot"></span>
+            <span class="pos-role">Senior Mechanic</span>
+            <span class="pos-tag">OPEN</span>
+          </div>
+          <div class="position-item">
+            <span class="pos-dot"></span>
+            <span class="pos-role">Race Driver</span>
+            <span class="pos-tag">OPEN</span>
+          </div>
+          <div class="position-item">
+            <span class="pos-dot pos-dot--amber"></span>
+            <span class="pos-role">Technical Crew</span>
+            <span class="pos-tag pos-tag--amber">LIMITED</span>
+          </div>
+        </div>
+
+        <!-- Decorative racing stripe -->
+        <div class="brand-stripes" aria-hidden="true">
+          <div class="stripe stripe-1"></div>
+          <div class="stripe stripe-2"></div>
+          <div class="stripe stripe-3"></div>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- ═══════════════════════════════════════════════
+         RIGHT — Form Panel
+    ════════════════════════════════════════════════ -->
+    <main class="form-panel">
+      <div class="form-container">
+
+        <!-- ── Application Form View ───────────────── -->
+        <div id="form-view">
+          <div class="form-header">
+            <div class="form-header-tag">🏁 CREW RECRUITMENT</div>
+            <h2 class="form-title">Join The Crew</h2>
+            <p class="form-subtitle">Submit your application below. We review every submission personally.</p>
+          </div>
+
+          <form id="recruitment-form" novalidate>
+
+            <!-- Full Name -->
+            <div class="form-group" id="group-name">
+              <label class="form-label" for="full_name">
+                <svg class="label-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/></svg>
+                Nama Lengkap
+              </label>
+              <div class="input-wrapper">
+                <input type="text" id="full_name" name="full_name"
+                  placeholder="Dominic Toretto" required
+                  autocomplete="off" maxlength="255" />
+                <div class="input-bar"></div>
+              </div>
+              <span class="field-error" id="name-error" role="alert"></span>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group" id="group-email">
+              <label class="form-label" for="email">
+                <svg class="label-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/></svg>
+                Alamat Email
+              </label>
+              <div class="input-wrapper">
+                <input type="email" id="email" name="email"
+                  placeholder="dom@midnightgarage.id" required
+                  autocomplete="off" maxlength="320" />
+                <div class="input-bar"></div>
+              </div>
+              <span class="field-error" id="email-error" role="alert"></span>
+            </div>
+
+            <!-- File Upload -->
+            <div class="form-group" id="group-file">
+              <label class="form-label">
+                <svg class="label-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M4 0h5.293A1 1 0 0 1 10 .293L13.707 4a1 1 0 0 1 .293.707V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm5.5 1.5v2a1 1 0 0 0 1 1h2l-3-3z"/></svg>
+                Foto KTP / SIM
+              </label>
+
+              <div class="upload-zone" id="upload-zone" role="button" tabindex="0" aria-label="Upload area for KTP or SIM file">
+                <input type="file" id="ktp_file" name="ktp_file"
+                  accept="image/jpeg,image/jpg,image/png,image/webp,application/pdf"
+                  hidden />
+
+                <!-- Placeholder state -->
+                <div class="upload-placeholder" id="upload-placeholder">
+                  <div class="upload-icon-wrap">
+                    <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z" />
+                    </svg>
+                    <div class="upload-pulse"></div>
+                  </div>
+                  <p class="upload-text">Drag &amp; drop atau <span class="upload-link">pilih file</span></p>
+                  <p class="upload-hint">JPEG · PNG · WEBP · PDF &nbsp;|&nbsp; Maks. 10 MB</p>
+                </div>
+
+                <!-- Preview state -->
+                <div class="upload-preview" id="upload-preview">
+                  <div class="preview-thumb-wrap">
+                    <img id="preview-img" src="" alt="Preview KTP/SIM" />
+                    <div class="preview-pdf-icon" id="preview-pdf" style="display:none">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM9 13h6v1H9v-1zm0 2.5h6v1H9v-1zm0-5h2v1H9v-1z"/></svg>
+                    </div>
+                  </div>
+                  <div class="preview-info">
+                    <p class="preview-name" id="preview-name"></p>
+                    <p class="preview-size" id="preview-size"></p>
+                    <button type="button" class="preview-change" id="preview-change">Ganti File</button>
+                  </div>
+                  <button type="button" class="preview-remove" id="preview-remove" aria-label="Remove file">
+                    <svg viewBox="0 0 16 16" fill="currentColor"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/></svg>
+                  </button>
+                </div>
+              </div>
+              <span class="field-error" id="file-error" role="alert"></span>
+            </div>
+
+            <!-- Global error banner -->
+            <div class="form-error-banner" id="form-error-banner" style="display:none" role="alert">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
+              <span id="form-error-text"></span>
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="submit-btn" id="submit-btn">
+              <span class="btn-default">
+                <svg class="btn-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M8.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L2.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093L8.95 4.992a.252.252 0 0 1 .02-.022zm-.92 5.14.92.92a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 1 0-1.091-1.028L9.477 9.417l-.485-.486-.943 1.179z"/></svg>
+                JOIN THE CREW
+              </span>
+              <span class="btn-loading" style="display:none">
+                <span class="btn-spinner"></span>
+                MEMPROSES...
+              </span>
+            </button>
+
+          </form>
+        </div>
+
+        <!-- ── Success View ────────────────────────── -->
+        <div id="success-view" style="display:none" aria-live="assertive">
+          <div class="success-content">
+            <div class="success-checkmark">
+              <svg viewBox="0 0 52 52" class="checkmark-svg">
+                <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                <path class="checkmark-tick" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+              </svg>
+            </div>
+            <div class="success-badge">APPLICATION RECEIVED</div>
+            <h2 class="success-title">
+              Welcome to the team,<br/>
+              <span id="success-name" class="success-name"></span>
+            </h2>
+            <p class="success-body">
+              Lamaran kamu sudah kami terima. Tim kami akan menghubungi kamu melalui email dalam waktu dekat.
+            </p>
+            <div class="success-details" id="success-details"></div>
+            <button class="submit-btn submit-btn--ghost" onclick="resetForm()">
+              Kirim Lamaran Lain
+            </button>
+          </div>
+        </div>
+
+      </div><!-- /form-container -->
+    </main>
+
+  </div><!-- /page-wrapper -->
+
+  <script src="app.js"></script>
+</body>
+</html>
