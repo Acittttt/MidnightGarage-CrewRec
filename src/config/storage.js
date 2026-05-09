@@ -1,21 +1,18 @@
 const { Storage } = require('@google-cloud/storage');
 require('dotenv').config();
 
-// When running on GCP (Cloud Run, App Engine), Application Default Credentials
-// are used automatically. GOOGLE_APPLICATION_CREDENTIALS is only needed locally.
-const storageOptions = { projectId: process.env.GCP_PROJECT_ID };
-if (process.env.GOOGLE_APPLICATION_CREDENTIALS) {
-  storageOptions.keyFilename = process.env.GOOGLE_APPLICATION_CREDENTIALS;
-}
+// Tanpa keyFilename, library ini bakal otomatis nyari kredensial 
+// dari 'gcloud auth application-default login' yang lo jalanin di terminal.
+const storageOptions = {
+  projectId: process.env.GCP_PROJECT_ID
+};
 
 const storage = new Storage(storageOptions);
 
-// Lazily resolve the bucket so the app can start without GCS env vars.
-// An error will only surface when an upload is actually attempted.
 function getBucket() {
   const name = process.env.GCS_BUCKET_NAME;
   if (!name) {
-    throw new Error('GCS_BUCKET_NAME environment variable is not set. Add it to your .env file.');
+    throw new Error('GCS_BUCKET_NAME belum di-set di .env');
   }
   return storage.bucket(name);
 }
