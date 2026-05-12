@@ -32,7 +32,4 @@ jobs:
             --region asia-southeast2 \
             --add-cloudsql-instances project-8824ecda-3817-45f7-b72:asia-southeast2:midnight-garage \
             --set-env-vars "DB_HOST=/cloudsql/project-8824ecda-3817-45f7-b72:asia-southeast2:midnight-garage,DB_USER=postgres,DB_PASS=12345,DB_NAME=midnight_garage,DB_PORT=5432,DB_SSL=false,GCS_BUCKET_NAME=midnight-garage-storage-baru,GCP_PROJECT_ID=project-8824ecda-3817-45f7-b72"
-
-git add .
-git commit -m "Testing automated deployment"
-git push origin main
+            
