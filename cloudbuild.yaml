@@ -1,0 +1,25 @@
+steps:
+  # 1. Build Docker Image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'asia-southeast2-docker.pkg.dev/project-8824ecda-3817-45f7-b72/garage-repo/midnight-app', '.']
+
+  # 2. Push Image ke Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'asia-southeast2-docker.pkg.dev/project-8824ecda-3817-45f7-b72/garage-repo/midnight-app']
+
+  # 3. Deploy ke Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'midnight-garage-app'
+      - '--image'
+      - 'asia-southeast2-docker.pkg.dev/project-8824ecda-3817-45f7-b72/garage-repo/midnight-app'
+      - '--region'
+      - 'asia-southeast2'
+      - '--allow-unauthenticated'
+      - '--add-cloudsql-instances'
+      - 'project-8824ecda-3817-45f7-b72:asia-southeast2:midnight-garage'
+      - '--set-env-vars'
+      - 'DB_HOST=/cloudsql/project-8824ecda-3817-45f7-b72:asia-southeast2:midnight-garage,DB_USER=postgres,DB_PASS=12345,DB_NAME=midnight_garage,DB_PORT=5432,DB_SSL=false,GCS_BUCKET_NAME=midnight-garage-storage-baru,GCP_PROJECT_ID=project-8824ecda-3817-45f7-b72'
