@@ -1,0 +1,38 @@
+name: Midnight Garage CI-CD Pipeline
+
+on:
+  push:
+    branches:
+      - "main" # Trigger otomatis tiap ada push ke branch main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Checkout Code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 2. Authenticate to GCP
+      - name: Authenticate to GCP
+        uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{ secrets.CLOUD_PROVIDER_CREDENTIALS }}'
+
+      # 3. Build & Push Docker Image
+      - name: Build and Push Image
+        run: |
+          gcloud builds submit --tag ${{ secrets.CONTAINER_REGISTRY_URL }} .
+
+      # 4. Deploy to Cloud Run
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy ${{ secrets.SERVICE_NAME }} \
+            --image ${{ secrets.CONTAINER_REGISTRY_URL }} \
+            --region asia-southeast2 \
+            --add-cloudsql-instances project-8824ecda-3817-45f7-b72:asia-southeast2:midnight-garage \
+            --set-env-vars "DB_HOST=/cloudsql/project-8824ecda-3817-45f7-b72:asia-southeast2:midnight-garage,DB_USER=postgres,DB_PASS=12345,DB_NAME=midnight_garage,DB_PORT=5432,DB_SSL=false,GCS_BUCKET_NAME=midnight-garage-storage-baru,GCP_PROJECT_ID=project-8824ecda-3817-45f7-b72"
+
+git add .
+git commit -m "Testing automated deployment"
+git push origin main
